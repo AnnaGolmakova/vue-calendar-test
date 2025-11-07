@@ -80,6 +80,7 @@ const calendarDays = computed(() =>
             :isToday="isSameDay(day, dayToday)"
             :isSelected="selectedDay && isSameDay(day, selectedDay)"
             :isWeekend="highlightwWeekends && isWeekend(day, locale)"
+            @click="$emit('select', day)"
           />
         </td>
       </tr>

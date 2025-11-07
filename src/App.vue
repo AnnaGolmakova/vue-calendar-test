@@ -5,7 +5,7 @@ import Calendar from "./components/Calendar.vue";
 <template>
   <main class="layout">
     <h1>Календарь</h1>
-    <Calendar />
+    <Calendar locale="pt-PT" @change="console.log" />
   </main>
 </template>
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  CalendarDate,
   getLocalTimeZone,
   parseDate,
   startOfMonth,
@@ -16,12 +17,20 @@ interface Props {
 
 const { selectedDay, locale = "ru-RU" } = defineProps<Props>();
 
-const currentSelection = selectedDay
-  ? convertToCalendarDate(selectedDay)
-  : undefined;
+const emit = defineEmits<{
+  (e: "change", date: string): void;
+}>();
+
+const currentSelection = ref(
+  selectedDay ? convertToCalendarDate(selectedDay) : undefined,
+);
 
 const currentMonth = ref(
-  startOfMonth(currentSelection ? currentSelection : today(getLocalTimeZone())),
+  startOfMonth(
+    selectedDay
+      ? convertToCalendarDate(selectedDay)
+      : today(getLocalTimeZone()),
+  ),
 );
 
 function convertToCalendarDate(date: string | Date) {
@@ -39,6 +48,11 @@ function showNextMonth() {
 function showPreviousMonth() {
   currentMonth.value = currentMonth.value.subtract({ months: 1 });
 }
+
+function handleDayClick(day: CalendarDate) {
+  currentSelection.value = day;
+  emit("change", day.toString());
+}
 </script>
 
 <template>
@@ -49,7 +63,12 @@ function showPreviousMonth() {
       @on-back="showPreviousMonth"
       @on-next="showNextMonth"
     />
-    <CalendarGrid :month="currentMonth" :locale="locale" />
+    <CalendarGrid
+      :month="currentMonth"
+      :selected-day="currentSelection"
+      :locale="locale"
+      @select="handleDayClick"
+    />
   </div>
 </template>
 
