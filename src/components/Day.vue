@@ -3,16 +3,23 @@ interface Props {
   isSelected?: boolean;
   isToday?: boolean;
   isWeekend?: boolean;
+  isOutdate?: boolean;
   label: string;
 }
 
-const { isSelected, isToday, isWeekend, label } = defineProps<Props>();
+const { isSelected, isToday, isWeekend, isOutdate, label } =
+  defineProps<Props>();
 </script>
 
 <template>
   <button
     class="day"
-    :class="{ selected: isSelected, today: isToday, weekend: isWeekend }"
+    :class="{
+      selected: isSelected,
+      today: isToday,
+      weekend: isWeekend,
+      outdate: isOutdate,
+    }"
   >
     {{ label }}
   </button>
@@ -53,5 +60,9 @@ const { isSelected, isToday, isWeekend, label } = defineProps<Props>();
 
 .weekend {
   color: red;
+}
+
+.outdate {
+  color: rgba(0, 0, 0, 0.5);
 }
 </style>
