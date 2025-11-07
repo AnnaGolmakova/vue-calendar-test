@@ -2,14 +2,18 @@
 interface Props {
   isSelected?: boolean;
   isToday?: boolean;
+  isWeekend?: boolean;
   label: string;
 }
 
-const { isSelected, isToday, label } = defineProps<Props>();
+const { isSelected, isToday, isWeekend, label } = defineProps<Props>();
 </script>
 
 <template>
-  <button class="day" :class="{ selected: isSelected, today: isToday }">
+  <button
+    class="day"
+    :class="{ selected: isSelected, today: isToday, weekend: isWeekend }"
+  >
     {{ label }}
   </button>
 </template>
@@ -44,6 +48,10 @@ const { isSelected, isToday, label } = defineProps<Props>();
 }
 
 .today {
-  border: solid 1px oklch(0.9 0.02 250 / 40%);
+  border: solid 1px oklch(0.8 0.02 250 / 60%);
+}
+
+.weekend {
+  color: red;
 }
 </style>
