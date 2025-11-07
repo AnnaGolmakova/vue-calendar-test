@@ -12,6 +12,9 @@ import MonthSwitch from "./MonthSwitch.vue";
 
 interface Props {
   selectedDay?: string | Date;
+  showDatesOutOfMonth?: boolean;
+  showWeekdays?: boolean;
+  highlightwWeekends?: boolean;
   locale?: string;
 }
 
@@ -66,6 +69,9 @@ function handleDayClick(day: CalendarDate) {
     <CalendarGrid
       :month="currentMonth"
       :selected-day="currentSelection"
+      :showDatesOutOfMonth="showDatesOutOfMonth"
+      :showWeekdays="showWeekdays"
+      :highlightwWeekends="highlightwWeekends"
       :locale="locale"
       @select="handleDayClick"
     />
