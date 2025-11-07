@@ -25,13 +25,21 @@ const formatTitle = (date: CalendarDate) => {
 
 <template>
   <div class="switcher">
-    <button class="button" aria-label="Предыдущий месяц">
+    <button
+      class="button"
+      aria-label="Предыдущий месяц"
+      @click="$emit('onBack')"
+    >
       <ChevronLeft />
     </button>
     <div>
       {{ formatTitle(date) }}
     </div>
-    <button class="button" aria-label="Следующий месяц">
+    <button
+      class="button"
+      aria-label="Следующий месяц"
+      @click="$emit('onNext')"
+    >
       <ChevronRight />
     </button>
   </div>

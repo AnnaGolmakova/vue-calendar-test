@@ -4,15 +4,15 @@ import {
   getLocalTimeZone,
   getWeeksInMonth,
   isSameDay,
-  parseDate,
   startOfMonth,
   startOfWeek,
   today,
 } from "@internationalized/date";
+import { computed } from "vue";
 import Day from "./Day.vue";
 
 interface Props {
-  month: string | CalendarDate;
+  month: CalendarDate;
   selectedDay?: CalendarDate;
   locale?: string;
 }
@@ -20,17 +20,23 @@ interface Props {
 const { month, selectedDay, locale = "ru-RU" } = defineProps<Props>();
 
 const dayToday = today(getLocalTimeZone());
-const monthStart = startOfMonth(
-  typeof month === "string" ? parseDate(month) : month,
-);
-const calendarGridStartDay = startOfWeek(monthStart, locale);
-const weeksInMonth = getWeeksInMonth(today(getLocalTimeZone()), locale);
 
-const calendarDays = Array.from({ length: weeksInMonth }, (_, week: number) => {
-  return Array.from({ length: 7 }, (_, day: number) =>
-    calendarGridStartDay.add({ weeks: week, days: day }),
-  );
-});
+const monthStart = computed(() => startOfMonth(month));
+const calendarGridStartDay = computed(() =>
+  startOfWeek(monthStart.value, locale),
+);
+
+const weeksInMonth = computed(() =>
+  getWeeksInMonth(today(getLocalTimeZone()), locale),
+);
+
+const calendarDays = computed(() =>
+  Array.from({ length: weeksInMonth.value }, (_, week: number) => {
+    return Array.from({ length: 7 }, (_, day: number) =>
+      calendarGridStartDay.value.add({ weeks: week, days: day }),
+    );
+  }),
+);
 </script>
 
 <template>
@@ -49,4 +55,11 @@ const calendarDays = Array.from({ length: weeksInMonth }, (_, week: number) => {
   </table>
 </template>
 
-<style scoped></style>
+<style scoped>
+table {
+  border-collapse: collapse;
+}
+td {
+  padding: 0;
+}
+</style>
