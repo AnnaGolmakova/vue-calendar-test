@@ -1,5 +1,34 @@
-# Vue 3 + TypeScript + Vite
+# Ккомпонент календаря на Vue 3 + TypeScript
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+![Screenshot](./docs/screenshot.png)
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+Простой компонент календаря для тестового задания Frontend разработчика.
+
+[Посмотреть на Github Pages](https://annagolmakova.github.io/vue-account-table-test/)
+
+## Использование компонента
+
+Базовое использование
+
+```Vue
+<Calendar @change="console.log" />
+```
+
+С дополнительными опциями:
+
+```Vue
+<Calendar
+  locale="en-US"
+  selectedDay="2025-12-31"
+  :highlightw-weekends="true"
+  :show-weekdays="true"
+  :show-dates-out-of-month="false"
+  @change="console.log"
+/>
+```
+
+1. В календарь можно передать дату в формате ISO 8601 `2025-11-12` или в виде `new Date()`, тогда календарь откроется на этом месяце и этот день будет выбран.
+2. Каледарь принимает настройку локали `<Calendar :locale="de-BE" />`. Локаль переключает как язык лейблов, так и то какой день недели будет первым. Значение по-умолчанию `ru-RU`
+3. Свойство `:highlightw-weekends` выделяет красным цветом выходные дни
+3. Свойство `:show-weekdays` управляет отображением дней недели
+3. Свойство `:show-dates-out-of-month` управляет отображением дней за пределом текущего месяца
