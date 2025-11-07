@@ -40,7 +40,7 @@ const locale = ref("ru-RU");
         <select name="pets" id="locales-select" v-model="locale">
           <option value="ru-RU">Russian</option>
           <option value="en-GB">English (GB)</option>
-          <option value="en-US">English (GB)</option>
+          <option value="en-US">English (US)</option>
           <option value="es-ES">Spanish</option>
           <option value="pt-PT">Portugal</option>
           <option value="de-DE">German (Germany)</option>
