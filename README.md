@@ -4,7 +4,7 @@
 
 Простой компонент календаря для тестового задания Frontend разработчика.
 
-[Посмотреть на Github Pages](https://annagolmakova.github.io/vue-account-table-test/)
+[Посмотреть на Github Pages](https://annagolmakova.github.io/vue-calendar-test/)
 
 ## Использование компонента
 
